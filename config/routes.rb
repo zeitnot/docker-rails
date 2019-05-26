@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root 'application#hello'
+  root 'polls#index'
+
+  resources :polls, only: :index
 end
