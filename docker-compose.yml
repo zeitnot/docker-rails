@@ -1,5 +1,11 @@
 version: '3'
 services:
+  db:
+    image: postgres:11.3
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
   rails:
     build: .
     volumes:
@@ -8,3 +14,9 @@ services:
       - "3000:3000"
     tty: true
     stdin_open: true
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USER: postgres
+
+volumes:
+  db-data:
