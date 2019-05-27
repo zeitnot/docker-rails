@@ -36,6 +36,7 @@ group :development, :test do
   gem 'debase', '0.2.3.beta5', require: false
   gem 'ruby-debug-ide'
   gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -49,6 +50,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

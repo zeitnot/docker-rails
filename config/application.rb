@@ -29,5 +29,9 @@ module DocRails
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.generators do |g|
+      g.test_framework :rspec, fixture: true
+      g.fixture_replacement :factory_bot
+    end
   end
 end
