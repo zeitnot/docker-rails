@@ -1,5 +1,11 @@
 version: '3'
 services:
+  selenium:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none
+    ports:
+      - '5900:5900'
   db:
     image: postgres:11.3
     ports:
@@ -10,13 +16,15 @@ services:
     build: .
     volumes:
       - .:/app
+      - gems-cache:/gems
     ports:
       - "3000:3000"
+      - "4000:4000"
     tty: true
     stdin_open: true
     environment:
       DATABASE_HOST: db
       DATABASE_USER: postgres
-
 volumes:
   db-data:
+  gems-cache:

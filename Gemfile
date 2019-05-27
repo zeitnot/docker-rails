@@ -33,6 +33,7 @@ gem 'mini_racer'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-rails'
   gem 'debase', '0.2.3.beta5', require: false
   gem 'ruby-debug-ide'
   gem 'rspec-rails', '~> 3.8'
@@ -49,7 +50,8 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', '~> 3.18'
+  gem 'selenium-webdriver', '~> 3.14'
   gem 'rails-controller-testing'
 end
 
