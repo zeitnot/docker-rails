@@ -1,0 +1,8 @@
+<% if @form.success %>
+  response = 'You votted.'
+<% else %>
+  response = '<%=@form.errors.full_messages.join(' ')%>'
+<% end%>
+id = 'response-<%=@form.poll.id%>'
+document.getElementById(id).innerHTML = response
+$('#'+id).show()

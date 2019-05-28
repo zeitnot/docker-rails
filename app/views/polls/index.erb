@@ -2,24 +2,25 @@
   <div class="row">
     <div>
       <% @polls.each do |poll|%>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              <span class="glyphicon glyphicon-arrow-right"></span><%=poll.name %>
-            </h3>
-          </div>
+        <%=form_for poll, url: vote_poll_path(poll), remote: true, method: :post do |f| %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <span class="glyphicon glyphicon-arrow-right"></span><%=poll.name %>
+              </h3>
+            </div>
 
-          <div class="poll-options">
-            <div class="panel-body">
-              <%= render template: 'polls/_option_list', locals: { options: poll.options } %>
-            </div>
-            <div class="panel-footer">
-              <button type="button" class="btn btn-primary btn-sm">
-                Vote</button>
-              <a href="#">View Result</a>
+            <div class="poll-options">
+              <div class="panel-body">
+                <%= render template: 'polls/_option_list', locals: { options: poll.options } %>
+              </div>
+              <div class="panel-footer">
+                <%=f.submit 'Vote', class: 'btn btn-primary btn-sm'%>
+                <span style="display: none" id="response-<%=poll.id%>"></span>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

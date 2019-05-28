@@ -38,7 +38,7 @@ RSpec.describe PollsController, type: :controller do
       end
 
       it 'returns 422 status code' do
-        post(:vote, params: { id: @poll, option_id: @option.id })
+        post(:vote, params: { id: @poll, option_id: @option.id }, format: :json)
 
         expect(response).to have_http_status(422)
         expect(Vote.where(poll: @poll)).to be_one
@@ -50,7 +50,7 @@ RSpec.describe PollsController, type: :controller do
         option = @poll.options.first
         expect(Vote).to be_none
 
-        post(:vote, params: { id: @poll, option_id: option })
+        post(:vote, params: { id: @poll, option_id: option }, format: :json)
 
         expect(response).to be_created
         expect(Vote.where(poll: @poll, poll_option: option)).to be_one

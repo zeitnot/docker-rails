@@ -6,10 +6,21 @@ class PollsController < ApplicationController
     @polls = Poll.all.includes(:options)
   end
 
-  # POST /polls/:id/vote
+  # POST /polls/:id/vote.json
   def vote
-    form = VotePollForm.new(poll_parameters)
-    form.save ? head(:created) : render(json: form.errors, status: :unprocessable_entity)
+    @form = VotePollForm.new(poll_parameters)
+
+    if @form.save
+      respond_to do |format|
+        format.json { head :created }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.json { render json: @form.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
   end
 
   private

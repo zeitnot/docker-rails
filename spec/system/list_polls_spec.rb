@@ -16,7 +16,7 @@ RSpec.describe 'List Polls' do
     it 'contains poll name in h3 title' do
       @polls.each_with_index do |poll, i|
         i2 = i + 1
-        node = page.find(".panel:nth-child(#{i2}) h3")
+        node = page.find("form:nth-child(#{i2}) .panel h3")
         expect(node.text).to eql(poll.name)
       end
     end
@@ -24,7 +24,7 @@ RSpec.describe 'List Polls' do
     it 'contains poll options' do
       @polls.each_with_index do |poll, i|
         i2 = i + 1
-        node = page.find(".panel:nth-child(#{i2}) .poll-options")
+        node = page.find("form:nth-child(#{i2}) .poll-options")
 
         expect(poll.options).to be_exists
         poll.options.each do |option|
@@ -40,10 +40,10 @@ RSpec.describe 'List Polls' do
 
     @polls.each_with_index do |_, i|
       i2 = i + 1
-      expect(page.find(".panel:nth-child(#{i2}) .poll-options", visible: :all)).to_not be_visible
+      expect(page.find("form:nth-child(#{i2}) .poll-options", visible: :all)).to_not be_visible
 
-      page.evaluate_script("$('.panel:nth-child(#{i2}) .panel-heading').click()")
-      expect(page.find(".panel:nth-child(#{i2}) .poll-options")).to be_visible
+      page.evaluate_script("$('form:nth-child(#{i2}) .panel-heading').click()")
+      expect(page.find("form:nth-child(#{i2}) .poll-options")).to be_visible
     end
   end
 end

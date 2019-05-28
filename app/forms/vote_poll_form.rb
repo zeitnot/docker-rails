@@ -1,21 +1,28 @@
 class VotePollForm
   include ActiveModel::Model
 
-  attr_accessor :poll, :option, :ip
+  attr_accessor :poll, :option, :option_id, :ip, :success
 
-  validate :validate_poll_and_option
+  validates_presence_of :option_id, message: 'Selection is required.'
+  validate :validate_poll_and_option, if: :option_id
   validate :validate_if_poll_voted
 
   def initialize(params = {})
-    @poll     = params[:poll]
-    @option   = @poll.options.find_by(id: params[:option_id])
-    @ip       = params[:ip]
+    @poll       = params[:poll]
+    @option     = @poll.options.find_by(id: params[:option_id])
+    @option_id  = @option&.id
+    @ip         = params[:ip]
   end
 
 
   def save
-    return poll.vote_for(option,ip) if valid?
-    false
+    if valid?
+      poll.vote_for(option,ip)
+      self.success = true
+    else
+      self.success = false
+      false
+    end
   end
 
   private
