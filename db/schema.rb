@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_105438) do
+ActiveRecord::Schema.define(version: 2019_05_28_120318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,5 +28,16 @@ ActiveRecord::Schema.define(version: 2019_05_28_105438) do
     t.datetime "expires_at"
   end
 
+  create_table "votes", id: false, force: :cascade do |t|
+    t.bigint "poll_id"
+    t.bigint "poll_option_id"
+    t.inet "ip"
+    t.datetime "created_at"
+    t.index ["poll_id"], name: "index_votes_on_poll_id"
+    t.index ["poll_option_id"], name: "index_votes_on_poll_option_id"
+  end
+
   add_foreign_key "poll_options", "polls", on_delete: :cascade
+  add_foreign_key "votes", "poll_options", on_delete: :cascade
+  add_foreign_key "votes", "polls", on_delete: :cascade
 end
