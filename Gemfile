@@ -53,6 +53,8 @@ group :test do
   gem 'capybara', '~> 3.18'
   gem 'selenium-webdriver', '~> 3.14'
   gem 'rails-controller-testing'
+  gem 'simplecov', '~> 0.16'
+  gem 'simplecov-console', '~> 0.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
