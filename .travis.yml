@@ -3,6 +3,7 @@ services:
   - docker
 dist: trusty
 env:
+  RAILS_ENV: test
   COMPOSE_VERSION: 1.23.2
 
 before_install:
@@ -15,9 +16,8 @@ before_install:
 install:
   - docker-compose build
   - docker-compose up -d
-
 script:
-  - docker-compose exec rails rake
+  - docker-compose exec rails rake db:create db:migrate spec
 
 after_script:
   - docker-compose down
