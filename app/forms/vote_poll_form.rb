@@ -28,11 +28,11 @@ class VotePollForm
   private
 
   def validate_poll_and_option
-    errors.add(:base, 'Option is not found') unless option
+    errors.add(:base, 'Option is not found.') unless option
   end
 
   def validate_if_poll_voted
     voted = Vote.where(poll: poll, ip: ip).exists?
-    errors.add(:base, 'You voted for this poll before') if voted
+    errors.add(:base, 'You voted for this poll before.') if voted
   end
 end

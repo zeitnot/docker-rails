@@ -1,8 +1,12 @@
 <% if @form.success %>
-  response = 'You votted.'
+  id = '#poll-item-<%=@form.poll.id%>'
+  response = "<%= j (render template: 'polls/_poll_stat', locals: { poll: @form.poll }) %>"
+  $(id).html(response)
+  $(id + ' .poll-options').show()
 <% else %>
+  id = '#response-<%=@form.poll.id%>'
   response = '<%=@form.errors.full_messages.join(' ')%>'
+  $(id).addClass('ajax-response-fail')
+  $(id).text(response)
+  $(id).show()
 <% end%>
-id = 'response-<%=@form.poll.id%>'
-document.getElementById(id).innerHTML = response
-$('#'+id).show()

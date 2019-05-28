@@ -7,10 +7,6 @@ gem 'rails', '~> 5.2.1'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -31,8 +27,6 @@ gem 'jquery-rails'
 gem 'mini_racer'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
   gem 'debase', '0.2.3.beta5', require: false
   gem 'ruby-debug-ide'
@@ -55,6 +49,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'simplecov', '~> 0.16'
   gem 'simplecov-console', '~> 0.4'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

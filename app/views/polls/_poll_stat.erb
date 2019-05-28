@@ -1,0 +1,26 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-arrow-right"></span><%=poll.name %>
+    </h3>
+  </div>
+
+  <div class="poll-options">
+    <div class="panel-body">
+      <br />
+      <% poll.options.each do |option| %>
+        <div class="progress">
+          <div class="col-md-2"> <%= option.name %></div>
+          <div class="col-md-6">
+            <div class="progress-bar progress-bar-success" role="progressbar" style="min-width: 2em; width: 60%;">
+              40%
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="panel-footer">
+      You voted
+    </div>
+  </div>
+</div>

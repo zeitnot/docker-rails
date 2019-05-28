@@ -3,7 +3,7 @@
 //= require rails-ujs
 
 $(document).ready(function () {
-    $('.panel-heading').on('click', function () {
+    $(document).on('click','.panel-heading',function () {
         $(this).siblings('.poll-options').toggle()
     })
 })

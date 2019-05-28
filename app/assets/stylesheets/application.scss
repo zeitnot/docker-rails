@@ -23,3 +23,17 @@ body { margin-top:20px; }
 .margin-bottom-none { margin-bottom: 0; }
 .panel-body .radio label,.panel-body .checkbox label { display:block; }
 .poll-options { display: none; }
+
+.ajax-response{
+  display: none;
+  font-weight: bold;
+}
+
+.ajax-response-success {
+  color: green;
+}
+
+.ajax-response-fail{
+  color: red;
+}
+

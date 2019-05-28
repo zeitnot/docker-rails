@@ -14,17 +14,15 @@ RSpec.describe 'List Polls' do
     end
 
     it 'contains poll name in h3 title' do
-      @polls.each_with_index do |poll, i|
-        i2 = i + 1
-        node = page.find("form:nth-child(#{i2}) .panel h3")
+      @polls.each do |poll|
+        node = page.find("#edit_poll_#{poll.id} .panel h3")
         expect(node.text).to eql(poll.name)
       end
     end
 
     it 'contains poll options' do
-      @polls.each_with_index do |poll, i|
-        i2 = i + 1
-        node = page.find("form:nth-child(#{i2}) .poll-options")
+      @polls.each do |poll|
+        node = page.find("#edit_poll_#{poll.id} .poll-options")
 
         expect(poll.options).to be_exists
         poll.options.each do |option|
@@ -38,12 +36,11 @@ RSpec.describe 'List Polls' do
   it 'toggles polls upon click', js: true do
     visit polls_path
 
-    @polls.each_with_index do |_, i|
-      i2 = i + 1
-      expect(page.find("form:nth-child(#{i2}) .poll-options", visible: :all)).to_not be_visible
+    @polls.each do |poll|
+      expect(page.find("#edit_poll_#{poll.id} .poll-options", visible: :all)).to_not be_visible
 
-      page.evaluate_script("$('form:nth-child(#{i2}) .panel-heading').click()")
-      expect(page.find("form:nth-child(#{i2}) .poll-options")).to be_visible
+      page.evaluate_script("$('#edit_poll_#{poll.id} .panel-heading').click()")
+      expect(page.find("#edit_poll_#{poll.id} .poll-options")).to be_visible
     end
   end
 end

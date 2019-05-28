@@ -16,7 +16,7 @@ services:
     build: .
     volumes:
       - .:/app
-      - gems-cache:/gems
+      - gems-cache:/usr/local/bundle
     ports:
       - "3000:3000"
       - "4000:4000"

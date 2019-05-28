@@ -1,5 +1,6 @@
 class PollsController < ApplicationController
   before_action :load_poll, only: :vote
+  helper_method :vote_before?
 
   # GET /polls
   def index
@@ -21,6 +22,10 @@ class PollsController < ApplicationController
         format.js
       end
     end
+  end
+
+  def vote_before?(poll)
+    Vote.where(poll: poll, ip: request.remote_ip).exists?
   end
 
   private
