@@ -9,17 +9,23 @@
 names = [
    {
        name: 'What is your favourite programming language?',
-       expires_at: 1.week.from_now
+       expires_at: 1.week.from_now,
+       options: %w[Ruby Php Python JavaScript Java C++]
    },
    {
        name: 'Do you like this Docker-Rails project?',
-       expires_at: 1.month.from_now
+       expires_at: 1.month.from_now,
+       options: %w[Yes No]
    },
 ]
 
 names.each do |params|
   Poll.transaction do
-    poll = Poll.create! params
+    poll = Poll.new params.slice(:name,:expires_at)
+    params[:options].each do |option|
+      poll.options << PollOption.new(name: option)
+    end
+    poll.save!
     puts " => '#{poll.name}' is created"
   end
 end

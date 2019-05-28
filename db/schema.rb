@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_103211) do
+ActiveRecord::Schema.define(version: 2019_05_28_105438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "poll_options", force: :cascade do |t|
+    t.bigint "poll_id"
+    t.string "name"
+    t.index ["poll_id"], name: "index_poll_options_on_poll_id"
+  end
 
   create_table "polls", force: :cascade do |t|
     t.string "name"
@@ -22,4 +28,5 @@ ActiveRecord::Schema.define(version: 2019_05_27_103211) do
     t.datetime "expires_at"
   end
 
+  add_foreign_key "poll_options", "polls", on_delete: :cascade
 end

@@ -11,7 +11,7 @@
 
           <div class="poll-options">
             <div class="panel-body">
-              <%= render template: 'polls/_option_list' %>
+              <%= render template: 'polls/_option_list', locals: { options: poll.options } %>
             </div>
             <div class="panel-footer">
               <button type="button" class="btn btn-primary btn-sm">

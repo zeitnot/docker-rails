@@ -1,6 +1,6 @@
 class PollsController < ApplicationController
 
   def index
-    @polls = Poll.all
+    @polls = Poll.all.includes(:options)
   end
 end
