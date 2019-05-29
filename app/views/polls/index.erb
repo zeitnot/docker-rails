@@ -3,7 +3,7 @@
       <% @polls.each do |poll|%>
         <div id="poll-item-<%=poll.id%>">
           <% if vote_before?(poll) %>
-            <%= render template: 'polls/_poll_stat', locals: { poll: poll } %>
+            <%= render template: 'polls/_poll_stat', locals: { poll: poll, stats: @stats } %>
           <% else %>
             <%= render template: 'polls/_poll_form', locals: { poll: poll } %>
           <% end %>

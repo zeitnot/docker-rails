@@ -12,8 +12,8 @@
         <div class="progress">
           <div class="col-md-2"> <%= option.name %></div>
           <div class="col-md-6">
-            <div class="progress-bar progress-bar-success" role="progressbar" style="min-width: 2em; width: 60%;">
-              40%
+            <div class="progress-bar progress-bar-success" role="progressbar" style="min-width: 2em; width: <%=stats[[poll.id, option.id]] || 0%>%;">
+              <%=stats[[poll.id, option.id]] || 0%>%
             </div>
           </div>
         </div>

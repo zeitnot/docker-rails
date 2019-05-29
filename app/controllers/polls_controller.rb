@@ -5,6 +5,7 @@ class PollsController < ApplicationController
   # GET /polls
   def index
     @polls = Poll.all.includes(:options)
+    @stats = Poll.stats
   end
 
   # POST /polls/:id/vote.json

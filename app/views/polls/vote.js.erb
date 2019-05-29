@@ -1,6 +1,6 @@
 <% if @form.success %>
   id = '#poll-item-<%=@form.poll.id%>'
-  response = "<%= j (render template: 'polls/_poll_stat', locals: { poll: @form.poll }) %>"
+  response = "<%= j (render template: 'polls/_poll_stat', locals: { poll: @form.poll, stats: Poll.stats }) %>"
   $(id).html(response)
   $(id + ' .poll-options').show()
 <% else %>
