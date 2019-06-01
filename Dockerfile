@@ -4,6 +4,8 @@ WORKDIR /app
 COPY Gemfile* /app/
 RUN bundle install
 COPY . /app/
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
 EXPOSE 3000
-WORKDIR /app
 CMD ["bundle","exec","rails","server","-b","0.0.0.0"]
