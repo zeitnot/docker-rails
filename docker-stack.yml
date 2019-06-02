@@ -24,5 +24,7 @@ services:
       - db
     env_file:
       - .env/production.env
+    deploy:
+      replicas: 4
 volumes:
   db-data:
