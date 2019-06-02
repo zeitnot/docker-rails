@@ -1,0 +1,28 @@
+version: '3.4'
+services:
+  migrator:
+    image: zeitnot/rails:prod
+    command: ["./wait-for","--timeout=300","db:5432","--","bin/rails","db:migrate"]
+    env_file:
+      - .env/production.env
+    deploy:
+      restart_policy:
+        condition: none
+  db:
+    image: postgres:11.3
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    env_file:
+      - .env/production.env
+  rails:
+    image: zeitnot/rails:prod
+    ports:
+      - "80:3000"
+    depends_on:
+      - db
+    env_file:
+      - .env/production.env
+volumes:
+  db-data:

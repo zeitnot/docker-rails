@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
   selenium:
     image: selenium/standalone-chrome-debug
@@ -12,8 +12,12 @@ services:
       - "5433:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+    env_file:
+      - .env/development.env
   rails:
-    build: .
+    build:
+      context: .
+      target: dev
     depends_on:
       - db
     volumes:
@@ -23,9 +27,8 @@ services:
       - "4000:4000"
     tty: true
     stdin_open: true
-    environment:
-      DATABASE_HOST: db
-      DATABASE_USER: postgres
+    env_file:
+      - .env/development.env
 volumes:
   db-data:
   gems-cache:
