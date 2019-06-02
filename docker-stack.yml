@@ -6,6 +6,8 @@ services:
     env_file:
       - .env/production.env
     deploy:
+      placement:
+        constraints: [node.role == manager]
       restart_policy:
         condition: none
   db:
@@ -16,6 +18,9 @@ services:
       - db-data:/var/lib/postgresql/data
     env_file:
       - .env/production.env
+    deploy:
+      placement:
+        constraints: [node.role == manager]
   rails:
     image: zeitnot/rails:prod
     ports:
@@ -25,6 +30,16 @@ services:
     env_file:
       - .env/production.env
     deploy:
-      replicas: 4
+      replicas: 8
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 volumes:
   db-data:
