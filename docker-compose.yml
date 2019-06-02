@@ -15,9 +15,7 @@ services:
     env_file:
       - .env/development.env
   rails:
-    build:
-      context: .
-      target: dev
+    build: .
     depends_on:
       - db
     volumes:
