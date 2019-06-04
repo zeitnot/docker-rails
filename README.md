@@ -62,3 +62,34 @@ We are almost finish. Once all services up and running we need to seed the datab
 
 Last, to see the cluster in action get the `node-1` machine ip with `$ docker-machine ip node-1` and visit 
 the poll application. 
+
+#### Deployment To AWS EC2 As Swarm Cluster
+Deploying to AWS EC2 instances is a bit complicated. First of all, a custom [VPC](https://docs.aws.amazon.com/vpc/index.html)
+with its subnets and routing tables must be created. [Here](https://docs.docker.com/docker-for-aws/faqs/#recommended-vpc-and-subnet-setup)
+is a working configuration. I tested this configuration with `eu-west-2` region
+and it worked.
+
+Once the configuration is set up, the following command should create the manager 
+instance: 
+
+```shell 
+$ docker-machine create -d amazonec2 \
+--amazonec2-vpc-id <your vpc id> \
+--amazonec2-subnet-id <your subnet id> \
+--amazonec2-region <your region> \
+--amazonec2-zone <your region zone> \
+--amazonec2-security-group <your security group name> \
+aws-manager-1
+```
+
+If this works in your scenario, you would apply to the same command in order
+to create worker instances.
+
+Once `manager` and `worker` instances are created `ubuntu` user should be
+added to docker group for every instances such as the following:
+
+`$ docker-machine ssh aws-manager "sudo usermod -a -G dokcer $USER"`
+
+We can init swarm mode on our `manager` instance with `$ docker swarm init --advertise-addr eth0`. 
+The rest of other things like joining workers is the same as the preceding 
+virtualbox example. 
