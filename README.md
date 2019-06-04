@@ -85,8 +85,8 @@ aws-manager-1
 If this works in your scenario, you would apply to the same command in order
 to create worker instances.
 
-Once `manager` and `worker` instances are created `ubuntu` user should be
-added to docker group for every instances such as the following:
+Once `manager` and `worker` instances are created, `ubuntu` user should be
+added to docker group for every instances such as the following command:
 
 `$ docker-machine ssh aws-manager "sudo usermod -a -G dokcer $USER"`
 
