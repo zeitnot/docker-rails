@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/zeitnot/docker-rails.svg?branch=master)](https://travis-ci.org/zeitnot/docker-rails)
 
 #### Description
-This repository is a playground for docerazing `Rails`, `Postgresql` and `Rspec` with docker compose.
+This repository is a playground for docerazing `Rails`, `Postgresql`, `Nginx` and `Rspec` with docker compose.
 The aim is creating a simple and robust development environment with docker compose and deploy the code
 to production with the help of docker swarm. This rails app is a simple poll application. It is listing polls
 and lets the user to vote for a poll. A user would vote only once with the same IP. 
