@@ -1,5 +1,29 @@
 version: '3.4'
 services:
+  nginx:
+    ports:
+      - protocol: tcp
+        mode: host
+        published: 80
+        target: 80
+    image: zeitnot/nginx:prod
+    volumes:
+      - assets:/var/www/poll/public
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+  asset_compiler:
+    image: zeitnot/rails:prod
+    command: ["bundle","exec","rake", "assets:precompile"]
+    volumes:
+      - assets:/app/public
+    env_file:
+      - .env/production.env
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: none
   migrator:
     image: zeitnot/rails:prod
     command: ["./wait-for","--timeout=300","db:5432","--","bin/rails","db:migrate"]
@@ -23,14 +47,20 @@ services:
         constraints: [node.role == manager]
   rails:
     image: zeitnot/rails:prod
+    stop_grace_period: 30s
     ports:
-      - "80:3000"
+      - "3000:3000"
     depends_on:
       - db
     env_file:
       - .env/production.env
     deploy:
-      replicas: 8
+      replicas: 4
+      update_config:
+        delay: 20s
+        parallelism: 1
+      placement:
+        constraints: [node.role == worker]
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
@@ -43,3 +73,4 @@ services:
         constraints: [node.role == manager]
 volumes:
   db-data:
+  assets:
