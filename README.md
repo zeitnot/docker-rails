@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/zeitnot/docker-rails.svg?branch=master)](https://travis-ci.org/zeitnot/docker-rails)
-
+# Docerazing Rails with Nginx and Postgresql
 #### Description
 This repository is a playground for docerazing `Rails`, `Postgresql`, `Nginx` and `Rspec` with docker compose.
 The aim is creating a simple and robust development environment with docker compose and deploy the code
